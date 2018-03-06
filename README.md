@@ -12,6 +12,9 @@ pip install nltk
 pip install google
 pip install SpeechRecognition
 pip install --upgrade google-cloud-speech
+pip install numpy
+pip install scipy
+pip install wave
 ```
 3. Go to the nltkMethod file located in SpeechBuddy-master > api and run the 3 commented out download commands. Recomment them.
 ```
