@@ -25,10 +25,10 @@ urlpatterns = [
     url(r'^recorder/', include('recorder.urls')),
     url(r'^about/', include('about.urls')),
     url(r'^api/', include('api.urls')),
-    url(r'^audio/', include('audio.urls'))
 
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

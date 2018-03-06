@@ -9,7 +9,7 @@ from struct import pack
 from scipy.signal import butter, lfilter
 import wave
 import numpy as np
-import urllib.request
+from pydub import AudioSegment
 
 
 # GLOBAL VARIABLES
@@ -306,9 +306,44 @@ def getData(fname):
         Not handled yet
     """
      #Extract Raw Audio from Wav File
-    urllib.request.urlopen("http://127.0.0.1:8000/audio/output.wav").read()
     sound_file = wave.open(fname, 'r')
     data = sound_file.readframes(-1)
     data = np.frombuffer(data, np.int16)
     sound_file.close()
     return data
+
+def convertToWav(filename):
+    """
+    # Arguments
+        classifier: A classifier object loaded with `keras.models.load_model`
+        or generated with `buildClassifier`
+        fname: Name of the audio file to analyze
+
+    # Returns
+        None
+
+    # Raises
+        Not handled yet
+    """
+    extension = filename[filename.find(".")+1:]
+    if extension != "wav":
+        audio = AudioSegment.from_file(file = filename, format = extension)
+        audio.export(filename[0:len(filename)-4] + '.wav', format="wav")
+
+def convertToFLAC(fname):
+    fname = "C:/users/austin/desktop/school/capstone/speechbuddy/audio/output.wav"
+    audio = getData(fname)
+    audio = audio[0::2]
+    data = pack('<' + ('h'*len(audio)), *audio)
+    new_file = wave.open(fname[:-4]+"_flac.wav", 'wb')
+    new_file.setnchannels(1)
+    new_file.setsampwidth(2)
+    new_file.setframerate(48000)
+    new_file.writeframes(data)
+    new_file.close()
+    fname = fname[:-4]+"_flac.wav"
+    extension = fname[fname.find(".")+1:]
+    if extension != "flac":
+        audio = AudioSegment.from_file(file = fname, format = extension)
+        audio.set_channels(1)
+        audio.export(fname[0:len(fname)-4] + '.flac', format="flac")
