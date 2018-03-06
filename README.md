@@ -46,4 +46,3 @@ from api.nltkMethod import mostCommon
 9. Edit this README with whatever steps that I missed or fixes to other errors that you ran into.
 
 ## Good Luck!
-# SpeechBuddy
