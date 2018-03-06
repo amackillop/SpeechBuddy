@@ -1,20 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <title>Bootstrap Website Tutorial</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="../static/js/csrf.js"></script>
-    <link rel="stylesheet" href="../static/css/modal.css">
+	<html lang="en">
+	<title>Speech Buddy</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../static/js/csrf.js"></script>
+		<link rel="stylesheet" href="../static/css/modal.css">
 
-    <link rel="stylesheet" href="../static/css/base.css">
+		<link rel="stylesheet" href="../static/css/base.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+	</script>
+
 </head>
 <body>
-<nav class="navbar navbar-inverse">
+  <nav id="myNavbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button id="hamburger" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a id="homeBtn" class="navbar-brand" href="#main">Speech Buddy</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul id="navCollapsed" class="nav navbar-nav navbar-right">
+          <li id="abtBtn" class="nav-item"> <a href="/" style="width: 80px" >Home</a></li>
+          <li id="portBtn" class="nav-item active"><a href="/recorder" style="width: 80px">Record</a></li>
+          <li id="conBtn" class="nav-item"><a href="/team" style="width: 80px">Team</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<!-- <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="MyNavbar">
@@ -32,7 +57,7 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> -->
 
 <div class="recordPage">
     <h1>SpeechBuddy.io <br> <br></h1>
@@ -75,9 +100,10 @@
 	
 	<!-- Pitch Detection -->
 	<div id = "fundementals">
-		
+		<h2></h2>
+		<div id = "chart_div"/div>
 	</div>
-
+	
     <script src="../static/js/recorderWeb.js"></script>
     <script src="../static/js/googleResponse.js"></script>
     <script src="../static/js/createCorpus.js"></script>

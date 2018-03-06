@@ -335,13 +335,13 @@ def convertToFLAC(fname):
     audio = getData(fname)
     audio = audio[0::2]
     data = pack('<' + ('h'*len(audio)), *audio)
-    new_file = wave.open(fname[:-4]+"_flac.wav", 'wb')
+    new_file = wave.open(fname[:-4]+"_mono.wav", 'wb')
     new_file.setnchannels(1)
     new_file.setsampwidth(2)
     new_file.setframerate(48000)
     new_file.writeframes(data)
     new_file.close()
-    fname = fname[:-4]+"_flac.wav"
+    fname = fname[:-4]+"_mono.wav"
     extension = fname[fname.find(".")+1:]
     if extension != "flac":
         audio = AudioSegment.from_file(file = fname, format = extension)

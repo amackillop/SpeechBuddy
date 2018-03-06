@@ -176,7 +176,7 @@ def parabolicInterpolation(cum_diff_matrix, taus, freq_range, Fs):
         
     return local_min_abscissae
 
-def pitchTrackingYIN(fname, freq_range = (40, 300), threshold = 0.1, timestep = 0.25, Fs = 44.1e3, Fc = 1e3, down_sample = False):
+def pitchTrackingYIN(fname, freq_range = (40, 300), threshold = 0.1, timestep = 0.1, Fs = 48e3, Fc = 1e3, down_sample = False):
 #    fname = "C:/Users/Austin/Desktop/School/Capstone/Speechbuddy-master/src/demo.wav"
 #    freq_range = (40, 300)
 #    threshold = 0.1
@@ -184,14 +184,17 @@ def pitchTrackingYIN(fname, freq_range = (40, 300), threshold = 0.1, timestep = 
 #    Fs = 16e3
 #    Fc = 1e3
 #    down_sample = False
-    W = int(Fs)//freq_range[0]
+    target_Fs = 8e3
+
     signal = getData(fname)
-    
-    #signal = downSample(signal, 1e3, 16000, 4)
+    step = int(Fs//target_Fs)
+    signal = downSample(signal, 1e3, Fs, step)
+    Fs = int(target_Fs)
     signal = butterLowpassFilter(signal, Fc, Fs, 6)
     signal = asarray(trim(signal))
     #signal = signal/max(signal)
     signal = signal.astype(float32)
+    W = int(Fs)//freq_range[0]
     sampled_signal = zeros(((signal.size//int(Fs*timestep)),2*W+2), float32)
     for i in range((signal.size//int(Fs*timestep))):
         t = int(i*Fs*timestep)
@@ -202,9 +205,10 @@ def pitchTrackingYIN(fname, freq_range = (40, 300), threshold = 0.1, timestep = 
     taus, cum_diff_mat = absoluteThresold(signal, freq_range, threshold, Fs)
     periods = parabolicInterpolation(cum_diff_mat, taus, freq_range, Fs)
 
-    f0 = zeros(signal.size//W-2)
+    f0 = zeros((signal.size//W-2, 2), int32)
     for i in range(signal.size//W-2):
-        f0[i] = Fs/periods[i]
+        f0[i,0] = i
+        f0[i,1] = Fs//periods[i]
 #    print("AVerage:   ", mean(f0), "    Time:   ", time()-time_start)
 #    figure()
 #    plot(f0)
