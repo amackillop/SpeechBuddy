@@ -240,7 +240,7 @@ def splitAudio(signal, sample_length):
         samples[i] = clip[int(sample_length*Fs*i):int(sample_length*Fs*(i + 1))]
     return samples
 
-def butterLowpass(cutoff, fs, order=5):
+def butterLowpassFilter(data, cutoff, fs, order = 6):
     """
     # Arguments
         classifier: A classifier object loaded with `keras.models.load_model`
@@ -256,22 +256,6 @@ def butterLowpass(cutoff, fs, order=5):
     nyq = 0.5 * fs
     normal_cutoff = cutoff / nyq
     b, a = butter(order, normal_cutoff, btype='low', analog=False)
-    return b, a
-
-def butterLowpassFilter(data, cutoff, fs, order = 5):
-    """
-    # Arguments
-        classifier: A classifier object loaded with `keras.models.load_model`
-        or generated with `buildClassifier`
-        fname: Name of the audio file to analyze
-
-    # Returns
-        None
-
-    # Raises
-        Not handled yet
-    """
-    b, a = butterLowpass(cutoff, fs, order=order)
     y = lfilter(b, a, data)
     return y.astype(np.int16)
 

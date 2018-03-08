@@ -12,6 +12,7 @@ from matplotlib.pyplot import plot, figure, close
 from numpy import mean, correlate, asarray, zeros, polyfit, poly1d, float32, int32
 from numpy import sum as npsum
 
+
 def crossCorr(x, tau, W, auto = False):
     """
     Autocorrelation, Step 1, Eq. (1)\n
@@ -202,8 +203,10 @@ def pitchTrackingYIN(fname, freq_range = (40, 300), threshold = 0.1, timestep = 
         
     sampled_signal = sampled_signal.flatten()
     signal = sampled_signal
-    taus, cum_diff_mat = absoluteThresold(signal, freq_range, threshold, Fs)
-    periods = parabolicInterpolation(cum_diff_mat, taus, freq_range, Fs)
+    taus = absoluteThresold(signal, freq_range, threshold, Fs)[0]
+    diff_mat = diffEquation(signal, W)
+    periods = parabolicInterpolation(diff_mat, taus, freq_range, Fs)
+    
 
     f0 = zeros((signal.size//W-2, 2), int32)
     for i in range(signal.size//W-2):
