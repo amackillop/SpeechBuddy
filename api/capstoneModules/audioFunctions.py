@@ -331,7 +331,6 @@ def convertToWav(filename):
         audio.export(filename[0:len(filename)-4] + '.wav', format="wav")
 
 def convertToFLAC(fname):
-    fname = "C:/users/austin/desktop/school/capstone/speechbuddy/audio/output.wav"
     audio = getData(fname)
     audio = audio[0::2]
     data = pack('<' + ('h'*len(audio)), *audio)
