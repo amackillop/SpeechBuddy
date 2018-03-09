@@ -30,10 +30,13 @@ function hover(id, data){
 
                 }
                 else{
-                    tempString = tempString + " "+ data.tok[i];
+                    tempString = tempString + ", "+ data.tok[i];
 
                 }
             }
+            console.log(tempString);
+            tempString = tempString.substring(2,tempString.length-1);
+            console.log(tempString);
             $('#string').html(tempString);
             //console.log(tempString);
         }
