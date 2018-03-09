@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 from os import path
 from tensorflow import get_default_graph
 from keras.models import load_model
-from joblib import load
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = path.dirname(path.dirname(path.abspath(__file__)))
