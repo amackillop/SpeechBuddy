@@ -314,11 +314,7 @@ def convertToWav(filename):
         audio = AudioSegment.from_file(file = filename, format = extension)
         audio.export(filename[0:len(filename)-4] + '.wav', format="wav")
 
-def convertToFLAC(fname):
-###<<<<<<< HEAD
-##    #fname = "C:/users/austin/desktop/school/capstone/speechbuddy/audio/output.wav"
-##=======
-##>>>>>>> 06254a9ca9ba1e8ab6cb541342daf80b12fd4dc0
+def convertToMono(fname, new_fname):
     audio = getData(fname)
     audio = audio[0::2]
     data = pack('<' + ('h'*len(audio)), *audio)
