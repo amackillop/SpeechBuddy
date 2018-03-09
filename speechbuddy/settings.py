@@ -134,6 +134,10 @@ STATICFILES_DIRS = [
     #'/var/www/static/',
 ]
 
+<<<<<<< HEAD
+=======
+##<<<<<<< HEAD
+>>>>>>> 51b97e954eec977587bee68613f3b89384d99369
 STATIC_ROOT = path.join(path.dirname(BASE_DIR),'SpeechBuddy/static_cdn')
 MEDIA_ROOT = path.join(path.dirname(BASE_DIR), 'SpeechBuddy/audio')
 MEDIA_URL = 'audio/'
@@ -144,3 +148,11 @@ modelFile = ROOT + '/SpeechBuddy/audio/Model_4_GoNoGo_5.h5'
 MODEL = load_model(modelFile)
 #pipe.steps.append(('nn', model))
 GRAPH = get_default_graph()
+<<<<<<< HEAD
+=======
+##=======
+STATIC_ROOT = path.join(path.dirname(BASE_DIR),'SpeechBuddy/static_cdn')
+MEDIA_ROOT = path.join(path.dirname(BASE_DIR), 'SpeechBuddy/audio')
+MEDIA_URL = 'audio/'
+##>>>>>>> 53405939e76040edd67f3ac57c7bbfff47436728
+>>>>>>> 51b97e954eec977587bee68613f3b89384d99369
