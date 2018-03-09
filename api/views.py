@@ -75,18 +75,9 @@ def googleCall(request):
         dataDict = request.data
         dataDict = dataDict['audio']
         path = default_storage.save(ROOT+'/SpeechBuddy/audio/output.wav', ContentFile(dataDict.read()))
-<<<<<<< HEAD
-        
-        # Manipulate original audio file
-        convertToMono(ROOT+'/SpeechBuddy/audio/output.wav', ROOT + "/SpeechBuddy/audio/output_mono.wav")
-        convertToFLAC(ROOT+'/SpeechBuddy/audio/output_mono.wav', ROOT + "/SpeechBuddy/audio/output_mono.flac")
-        
-        # Delete original file
-=======
             
         # Google API
         convertToFLAC(ROOT+'/SpeechBuddy/audio/output.wav')
->>>>>>> 53405939e76040edd67f3ac57c7bbfff47436728
         if default_storage.exists(path):
             default_storage.delete(path)
         res = googleApiCall(ROOT+'/SpeechBuddy/audio/output_mono.flac')
