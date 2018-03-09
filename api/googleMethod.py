@@ -9,7 +9,7 @@ from google.cloud.speech import types
 import wave
 
 def googleApiCall(path):
-
+#    path = "C:/Users/Austin/Desktop/school/capstone/speechbuddy/audio/output_mono.flac"
     # Instantiates a client
     client = speech.SpeechClient()
 
@@ -30,7 +30,11 @@ def googleApiCall(path):
 
     # Detects speech in the audio file
     response = client.recognize(config, audio)
-    response = formatResponse(response)
+    try:
+        response = formatResponse(response)
+    except:
+        return "Empty Response"
+#    print(response)
     return response
 
 def formatResponse(response):

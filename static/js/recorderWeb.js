@@ -133,8 +133,9 @@
                             success: function(data) {
 								console.log("SUCCESS");
 								googleResponse(data);
-								pitchResponse(data);
 								nltkCorpus(data);
+								pitchResponse(data);
+								fillerCountResponse(data);
 								console.log(data);
                             }
                         });

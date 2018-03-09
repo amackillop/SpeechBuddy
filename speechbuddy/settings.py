@@ -10,11 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-import os
+from os import path
+from tensorflow import get_default_graph
+from keras.models import load_model
+from joblib import load
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+BASE_DIR = path.dirname(path.dirname(path.abspath(__file__)))
+ROOT = path.join(path.dirname(BASE_DIR))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -82,7 +85,7 @@ WSGI_APPLICATION = 'speechbuddy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -126,10 +129,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
+    path.join(BASE_DIR, "static")
     #'/var/www/static/',
 ]
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR),'SpeechBuddy/static_cdn')
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'SpeechBuddy/audio')
+STATIC_ROOT = path.join(path.dirname(BASE_DIR),'SpeechBuddy/static_cdn')
+MEDIA_ROOT = path.join(path.dirname(BASE_DIR), 'SpeechBuddy/audio')
 MEDIA_URL = 'audio/'
+
+# Neural network stuff
+modelFile = ROOT + '/SpeechBuddy/audio/Model_4_GoNoGo_5.h5'    
+#pipe = load(modelFile.replace('.h5','.pkl'))
+MODEL = load_model(modelFile)
+#pipe.steps.append(('nn', model))
+GRAPH = get_default_graph()
